@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  dn42-show:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dn42-show
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - dn42-network
+    labels:
+      - "com.dn42.description=DN42 AS Network Website"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+networks:
+  dn42-network:
+    driver: bridge

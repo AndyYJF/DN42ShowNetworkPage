@@ -1,0 +1,18 @@
+node_modules
+dist
+dist-ssr
+*.local
+.git
+.gitignore
+README.md
+QUICKSTART.md
+DEPLOYMENT.md
+DOCKER-DEPLOYMENT.md
+DN42 AS Website Frontend Gener.md
+*.tar.gz
+.DS_Store
+.vscode
+.idea
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

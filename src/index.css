@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-cyber-blue/20;
+  }
+
+  body {
+    @apply bg-cyber-darker text-cyber-blue font-mono antialiased;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 217, 255, 0.03) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0, 217, 255, 0.03) 3px
+      );
+    background-size: 100% 3px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .cyber-border {
+    @apply border border-cyber-blue/30 relative;
+  }
+
+  .cyber-border::before {
+    content: '';
+    @apply absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-cyber-blue;
+  }
+
+  .cyber-border::after {
+    content: '';
+    @apply absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-cyber-blue;
+  }
+
+  .cyber-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  }
+
+  .cyber-button {
+    @apply px-6 py-3 bg-transparent border-2 border-cyber-blue text-cyber-blue font-display font-bold uppercase tracking-wider relative overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .cyber-button::before {
+    content: '';
+    @apply absolute inset-0 bg-cyber-blue translate-x-[-100%] transition-transform duration-300;
+    z-index: -1;
+  }
+
+  .cyber-button:hover::before {
+    @apply translate-x-0;
+  }
+
+  .cyber-button:hover {
+    @apply text-cyber-darker shadow-[0_0_20px_rgba(0,217,255,0.5)];
+  }
+
+  .cyber-card {
+    @apply bg-cyber-dark/50 backdrop-blur-sm cyber-border p-6 relative;
+  }
+
+  .cyber-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyber-blue to-transparent opacity-50;
+  }
+
+  .status-indicator {
+    @apply w-2 h-2 rounded-full animate-glow-pulse;
+  }
+
+  .status-online {
+    @apply bg-cyber-green;
+    box-shadow: 0 0 10px #39ff14;
+  }
+
+  .status-maintenance {
+    @apply bg-yellow-400;
+    box-shadow: 0 0 10px #fbbf24;
+  }
+
+  .status-offline {
+    @apply bg-cyber-red;
+    box-shadow: 0 0 10px #ff0055;
+  }
+
+  .scanline {
+    @apply pointer-events-none fixed inset-0 z-50;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 217, 255, 0.05) 50%,
+      transparent 100%
+    );
+    animation: scan 8s linear infinite;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+@layer utilities {
+  .text-glow-blue {
+    text-shadow: 0 0 10px #00d9ff, 0 0 20px #00d9ff, 0 0 30px #00d9ff;
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+  }
+
+  .text-glow-purple {
+    text-shadow: 0 0 10px #b537f2, 0 0 20px #b537f2;
+  }
+}
+
+/* Leaflet map dark theme overrides */
+.leaflet-container {
+  @apply bg-cyber-darker;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply bg-cyber-dark border border-cyber-blue/50 text-cyber-blue font-mono;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.leaflet-popup-tip {
+  @apply bg-cyber-dark border-cyber-blue/50;
+}
+
+.leaflet-popup-close-button {
+  @apply text-cyber-blue hover:text-cyber-green;
+}
