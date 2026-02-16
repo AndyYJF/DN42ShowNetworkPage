@@ -38,7 +38,7 @@ export default function NetworkMap() {
       return L.divIcon({
         className: 'custom-marker',
         html: `
-          <div style="position: relative;">
+          <div style="position: relative; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
             <div style="
               width: 16px;
               height: 16px;
@@ -47,6 +47,8 @@ export default function NetworkMap() {
               border-radius: 50%;
               box-shadow: 0 0 10px ${color}, 0 0 20px ${color};
               animation: glow-pulse 2s ease-in-out infinite;
+              position: relative;
+              z-index: 2;
             "></div>
             <div style="
               position: absolute;
@@ -58,6 +60,7 @@ export default function NetworkMap() {
               border: 1px solid ${color};
               border-radius: 50%;
               opacity: 0.3;
+              z-index: 1;
             "></div>
           </div>
         `,
