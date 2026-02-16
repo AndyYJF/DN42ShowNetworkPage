@@ -2,12 +2,12 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import { networkConfig } from '../config';
 
-// Fix for default marker icons in Leaflet
+// Fix for default marker icons in Leaflet (使用本地资源)
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+  iconRetinaUrl: '/leaflet-icons/marker-icon-2x.png',
+  iconUrl: '/leaflet-icons/marker-icon.png',
+  shadowUrl: '/leaflet-icons/marker-shadow.png',
 });
 
 export default function NetworkMap() {
@@ -26,11 +26,10 @@ export default function NetworkMap() {
       zoomControl: true,
     });
 
-    // Add CartoDB Dark Matter tile layer
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20,
+    // Add GeoQ Dark tile layer (国内访问更快)
+    L.tileLayer('https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; GeoQ',
+      maxZoom: 18,
     }).addTo(map);
 
     // Custom icon for nodes
